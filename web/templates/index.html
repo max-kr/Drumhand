@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AVPRG | Hand Drum</title>
+    <meta charset="utf-8">
+    <meta name="active-menu" content="home">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container-fluid bg-3 text-center">    
+        <img src="{{ url_for('video_feed') }}">
+    </div>
+    
+</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="js/webaudio.js"></script>
+    <script src="js/menu.js"></script>
+
+    <script type="text/javascript">
+        const socket = io();
+        socket.on('output', function(data) {
+            switch (data) {
+                case '1':
+                    playDrums(0);
+                    break;
+                case '2':
+                    playDrums(1);
+                    break;
+                case '3':
+                    playDrums(2);
+                    break;
+            }
+        });
+    </script>
+</html>
