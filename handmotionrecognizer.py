@@ -5,10 +5,7 @@ from sklearn.metrics import pairwise
 
 class HandMotionRecognizer:
     def __init__(self,accumWeight = 0.5):
-        # store the accumulated weight factor
         self.accumWeight = accumWeight
-
-        # # initialize the background model
         self.bg = None
 
     def update(self, image):
@@ -21,9 +18,6 @@ class HandMotionRecognizer:
     def segment(self, image, threshold=25):
         diff = cv2.absdiff(self.bg.astype("uint8"), image)
         thresholded = cv2.threshold(diff, threshold, 255, cv2.THRESH_BINARY)[1]
-
-        #thresholded = cv2.erode(thresholded, None, iterations=2)
-        #thresholded = cv2.dilate(thresholded, None, iterations=2)
 
         (cnts, _) = cv2.findContours(thresholded.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
